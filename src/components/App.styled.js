@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TextTitle = styled.h2`
+export const Title = styled.h1`
   padding: 10px 10px;
   background-color: grey;
 `;

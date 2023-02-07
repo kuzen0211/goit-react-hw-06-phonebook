@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Wraper = styled.form`
   display: flex;
   flex-direction: column;
+
   border: 2px solid black;
   padding: 10px 10px;
   margin-bottom: 20px;
@@ -17,7 +18,7 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   display: block;
-  width: 400px;
+  min-width: 250px;
   margin-top: 5px;
   outline: none;
 `;

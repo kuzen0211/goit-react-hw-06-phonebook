@@ -8,13 +8,15 @@ export const DeleteBtn = styled.button`
   border: 1px solid grey;
   border-radius: 5px;
   outline: none;
+  margin-left: 40px;
 `;
 
 export const List = styled.ul`
   margin: 0;
   padding: 0;
   margin-left: 50px;
-  width: 370px;
+  margin-right: 50px;
+  width: auto;
 `;
 
 export const Item = styled.li`

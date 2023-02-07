@@ -1,14 +1,38 @@
-import { DeleteBtn, List, Item } from './Contacts.styled';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const Contacts = ({ contacts, deleteContact, upperCaseWord }) => {
+import { DeleteBtn, List, Item } from './Contacts.styled';
+
+import { deleteContact } from '../redux/contact.slice';
+import { getFilter } from '../redux/filter.slice';
+import { getContacts } from '../redux/contact.slice';
+
+export const Contacts = () => {
+  const filter = useSelector(getFilter);
+  const contacts = useSelector(getContacts);
+
+  const dispatch = useDispatch();
+
+  const delContact = id => {
+    dispatch(deleteContact(id));
+  };
+
+  const upperCaseWord = data => {
+    return data[0].toUpperCase() + data.substring(1);
+  };
+
+  const sortedContacts = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter)
+    );
+  };
+
   return (
     <List>
-      {contacts.map(contact => {
+      {sortedContacts()?.map(contact => {
         return (
           <Item key={contact.id}>
             {upperCaseWord(contact.name)}: {contact.number}
-            <DeleteBtn type="button" onClick={() => deleteContact(contact.id)}>
+            <DeleteBtn type="button" onClick={() => delContact(contact.id)}>
               Delete
             </DeleteBtn>
           </Item>
@@ -16,16 +40,4 @@ export const Contacts = ({ contacts, deleteContact, upperCaseWord }) => {
       })}
     </List>
   );
-};
-
-Contacts.propType = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.number.isRequired,
-    })
-  ),
-  deleteContact: PropTypes.func.isRequired,
-  upperCaseWord: PropTypes.func.isRequired,
 };
